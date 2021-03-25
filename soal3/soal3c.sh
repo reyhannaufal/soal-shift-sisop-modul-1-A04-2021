@@ -31,15 +31,5 @@ rdfind -deleteduplicates true "$dir"
 `rm "$dir$nama_rem"`
 `mkdir "$nama_folder"`
 `mv Foto.log "$nama_folder"`
-
-for ((num=1; num<=23; num=num+1))
-do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-        `mv "$name" "$nama_folder"`
-done
+name_file="Koleksi"
+`mv $name_file* "$nama_folder"`
