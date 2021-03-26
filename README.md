@@ -126,6 +126,7 @@ Iterasi sebanyakan 23 kali sesuai jumlah gambar yang akan didownload. Di dalam i
 rdfind -deleteduplicates true "$dir"
 ```
 Hapus atau remove semua file atau gambar yang ada lebih dari satu (duplikat) dengan fungsi rdfind dan parameter -deleteduplicates true "alamat file".
+
 **Kendala atau eror selama pengerjaan:**
 - Fungsi wget tidak bisa digunakan dengan pesan eror="Permision denied"
 Cara mengatasi dengan memberi fungsi sudo sebelum wget. Link referensi: https://askubuntu.com/questions/55606/getting-permission-denied-error-with-wget
@@ -171,6 +172,7 @@ do
 done
 ```
 Iterasi sampai 23 kali untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * (sesuai soal).
+
 **Kendala atau eror selama pengerjaan:**
 - Crontab tidak bisa berjalan di komputer atau linux saya.
 
