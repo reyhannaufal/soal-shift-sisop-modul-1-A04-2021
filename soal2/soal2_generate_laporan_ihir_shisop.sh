@@ -3,17 +3,27 @@
  file='./Laporan-TokoShiSop.tsv'
  output='./hasil.txt'
 
- # a. Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui Row ID dan profit percentage terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:
- # awk -F '\t' 'BEGIN {
+# a
+awk -F '\t' 'BEGIN {
+    max = 0
+    idmax = 9950
+} {
+    if(NR!=1) {
+          pp[$1] += (($21/($18-$21))*100) 
+    }
+} END {
+    for (i in pp){
+        if (pp[i] > max && i > idmax) {
+            max = pp[i]
+            idmax = i
+        }
+    }
+    printf "Transaksi terakhir dengan profit precentage terbesar yaitu %d dengan presentasi %.2f", idmax, max
+}' $file >> $output
 
- # }'
-
-
- # b nama customer pada transaksi tahun 2017 di Albuquerque.
- # cust_name[7]
- # order-date[2]
- # pada tahun 2017 antara lain:"
+ # b
  awk -F '\t' 'BEGIN {
+    print "\n"
     print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
  } {
      if($10 == "Albuquerque") {
@@ -24,17 +34,39 @@
      for (b in a) print b
  }' $file >> $output
 
- # c.	TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan segment customer dan jumlah transaksinya yang paling sedikit.
- # segment[8]
+ # c.
+ awk -F '\t' 'BEGIN {
+     print "\n"
+ } {
+    if($8=="Home Office")
+        a++
+    if($8 == "Corporate")
+        b++
+    if($8 == "Consumer")
+        c++
+ } END {
+    if(b>a && c>a)
+        printf "Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan %d transaksi.\n", a
+    if(a>b && c>b)
+       printf "Tipe segmen customer yang penjualannya paling sedikit adalah Corporate dengan %d transaksi.\n", b
+    if(a>c && b>c)
+        printf "Tipe segmen customer yang penjualannya paling sedikit adalah Consumer dengan %d transaksi.\n", c
+ }' $file >> $output
 
 
- # d.	TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit dan total keuntungan wilayah tersebut.
+ # d.
  awk -F '\t' 'BEGIN {
      printf "\n"
  }{
-     a[$13]++;
-     asum[$13] += $NF
+     if(NR!=1)
+        sum[$13] += $NF
  } END {
-     for (i in asum) print a[i], asum[i] 
-    
+     min = 99999
+     for (i in sum) {
+         if (sum[i] < min) {
+             min = sum[i]
+             id = i
+         }
+     }
+     printf "Wilayah bagian (region) yang memiliki total keuntungan profit paling sedikit %s dengan total keuntungan %d", id, min
  }' $file >> $output
