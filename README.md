@@ -125,11 +125,52 @@ Iterasi sebanyakan 23 kali sesuai jumlah gambar yang akan didownload. Di dalam i
 ```sh
 rdfind -deleteduplicates true "$dir"
 ```
-Hapus atau remove semua file atau gambar yang ada lebih dari satu (duplikat) dengan fungsi rdfind dan parameter -deleteduplicates true "alamat file".<br/><br/>
-Kendala atau eror selama pengerjaan:
+Hapus atau remove semua file atau gambar yang ada lebih dari satu (duplikat) dengan fungsi rdfind dan parameter -deleteduplicates true "alamat file".
+**Kendala atau eror selama pengerjaan:**
 - Fungsi wget tidak bisa digunakan dengan pesan eror="Permision denied"
 Cara mengatasi dengan memberi fungsi sudo sebelum wget. Link referensi: https://askubuntu.com/questions/55606/getting-permission-denied-error-with-wget
 - Sangat susah untuk mendownload gambar untuk tidak duplikasi
 Cara penyelesaiannya dengan download semua gambar lalu hapus gambar duplikasi dengan fungs rdfind. Link referensi: https://www.tecmint.com/find-and-delete-duplicate-files-in-linux/.<br/>
 ### 3b
 **Penjelasan**
+```sh
+dir="`pwd`/"
+
+for ((num=1; num<=23; num=num+1))
+do
+        name="Koleksi_"
+        if [ $num -lt 10 ]
+        then
+                name="${name}0${num}"
+        else
+                name="${name}${num}"
+        fi
+        wget -N -a Foto.log --page-requisites "https://loremflickr.com/320/240/kitten" -O "$dir$name"
+done
+
+rdfind -deleteduplicates true "$dir"
+```
+Copy semua isi dari soal3a.sh (karena untuk awalan sama).
+```sh
+name_folder="`date +%d-%m-%Y`"
+`mkdir "$name_folder"`
+`mv Foto.log "$name_folder"`
+```
+Buat nama folder dengan nama tanggal dengan format DD-MM-YYYY, dengan fungsi date. Buat folder dengan nama di atas dengan fungsi mkdir. Pindahkan file "Foto.log" ke folder baru tersebut dengan fungsi mv.
+```sh
+for ((num=1; num<=23; num=num+1))
+do
+        name="Koleksi_"
+        if [ $num -lt 10 ]
+        then
+                name="${name}0${num}"
+        else
+                name="${name}${num}"
+        fi
+	`mv "$name" "$name_folder"`
+done
+```
+Iterasi sampai 23 kali untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * (sesuai soal).
+**Kendala atau eror selama pengerjaan:**
+- Crontab tidak bisa berjalan di komputer atau linux saya.
+
