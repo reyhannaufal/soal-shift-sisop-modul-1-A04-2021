@@ -252,3 +252,17 @@ Hapus semua folder yang telah dicopy ke zip.
 
 Kendala atau eror selama pengerjaan:
 - Mengalami kebingungan untuk memindah type folder di linux. Dan nemu solusinya dengan wildcard "*/". Link referensi: https://unix.stackexchange.com/questions/68489/command-to-zip-multiple-directories-into-individual-zip-files
+
+### 3e
+**Penjelasan**
+```sh
+0 7 * * 1-5 cd /home/mufis/PS/Pratikum_01/soal3 && zip -r --password "`date +%m%d%Y`" Koleksi.zip */ ; rm -r */
+```
+Membuat crontab dengan 2 pola waktu. Yang pertama untuk menzip folder, dengan pola senin-jumat jam 7 pagi. Pada pola pertama diisi dengan perintah buka directory yang dimaksud dengan perintah 'cd' lalu zip folder dengan perintah 'zip' serta password tanggal pada hari itu dengan perintah 'date', masukan ke file zip "Koleksi.zip". Setelah itu hapus semua folder dengan perintah 'rm' dan wildcard "*/".
+```sh
+0 18 * * 1-5 cd /home/mufis/PS/Pratikum_01/soal3 && unzip -P "`date +%m%d%Y`" Koleksi.zip ; rm -r *.zip
+```
+Yang kedua unzip folder dengan pola senin-jumat jam 18. Pada pola kedua diisi dengan perintah membuka directory yang dimaksud dengan perintah "cd" lalu unzip file "Koleksi.zip" dengan perintah "unzip" dengan password pada tanggal atau hari kejadian dengan perintah "date". Srelah itu hapus semua file zip dengan perintah "rm" dan wildcard "*.zip".
+
+Kendala atau eror selama pengerjaan:
+- Tidak ditemukan eror atau kendala yang berarti saat pengerjaan no3e
