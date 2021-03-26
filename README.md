@@ -108,7 +108,8 @@ Mendefisikan nilai minimum dan membandingan nilai pada array sum, sehingga menda
 ## NO3
 ### 3a
 **Penjelasan**
-```for ((num=1; num<=23; num=num+1))
+```sh 
+for ((num=1; num<=23; num=num+1))
 do
 	name="Koleksi_"
 	if [ $num -lt 10 ]
@@ -121,7 +122,8 @@ do
 done
 ```
 Iterasi sebanyakan 23 kali sesuai jumlah gambar yang akan didownload. Di dalam iterasi dibuat variabel nama yang berisi string "Koleksi_" untuk menamai file/gambar yang didownload. Variabel nama tersebut disesuaikan formatnya yakni ditambahin dua digit angka (sesuai iterasi) setelahnya ("Koleksi_01, Koleksi_02, ... Koleksi_23"). Download gambar dari link="https://loremflickr.com/320/240/kitten", dengan fungsi wget dan simpan lognya ke file "Foto.log" dengan parameter -a. Dan jangan lupa namai file/gambar download tersebut sesuai dengan format/variabel nama.
-```rdfind -deleteduplicates true "$dir"
+```sh
+rdfind -deleteduplicates true "$dir"
 ```
 Hapus atau remove semua file atau gambar yang ada lebih dari satu (duplikat) dengan fungsi rdfind dan parameter -deleteduplicates true "alamat file".<br/><br/>
 Kendala atau eror selama pengerjaan:
