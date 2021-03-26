@@ -171,8 +171,61 @@ do
 	`mv "$name" "$name_folder"`
 done
 ```
-Iterasi sampai 23 kali untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * (sesuai soal).
+Iterasi sampai 23 kali untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. 
+```sh
+0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * /home/mufis/PS/Pratikum_01/soal3/soal3b.sh
+```
+Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * (sesuai soal).
 
 **Kendala atau eror selama pengerjaan:**
 - Crontab tidak bisa berjalan di komputer atau linux saya.
+
+### 3c
+**Penjelasan**
+```sh
+tanggal="`date +%d`"
+nama_folder="`date +%d-%m-%Y`"
+```
+Membuat variabel "tanggal" untuk menyimpan nilai tanggal (hari ke-h script dijalankan). Serta membuat variabel "nama_folder" dengan fungsi 'date' untuk menyimpan nama folder yang akan dipakai nantinya.
+```sh
+if [ $(($tanggal % 2)) -eq 1 ]
+then
+	url="https://loremflickr.com/320/240/bunny"
+	nama_folder="Kelinci_$nama_folder"
+else
+	url="https://loremflickr.com/320/240/kitten"
+	nama_folder="Kucing_$nama_folder"
+fi
+```
+Karena harus bergantian secara hari file yang harus didownload (gambar kelinci atau kucing), pakai fungsi "if" untuk memberi kondisi dengan parameter "tanggal" yang telah dibuat tadi lalu dimod 2. Jika ganjil maka download kelinci dan nama folder "Kelinci_(tanggal saat itu)". Selain itu, gambar kucing yang akan didownload.
+```sh
+for ((num=1; num<=23; num=num+1))
+do
+        name="Koleksi_"
+        if [ $num -lt 10 ]
+        then
+                name="${name}0${num}"
+        else
+                name="${name}${num}"
+        fi
+        wget -a Foto.log "$url" -O "$dir$name"
+done
+```
+Lakukan iterasi 23 untuk mendowload file gambar/kelinci sesuai hari saat itu.
+```sh
+nama_rem="results.txt"
+rdfind -deleteduplicates true "$dir"
+`rm "$dir$nama_rem"`
+```
+Hapus file yang berduplikat. Hapus file "results.txt" karena mengandung hasil pengahapusan file yang duplikat.
+```sh
+`mkdir "$nama_folder"`
+`mv Foto.log "$nama_folder"`
+name_file="Koleksi"
+`mv $name_file* "$nama_folder"`
+```
+Buat folder baru dengan nama yang telah disediakan di variabel "nama_folder". Pindahkan file tadi ke dalam folder yang telah dibuat. Pindahkan file 'Foto.log' dan semua gambar tadi ke folder baru.
+
+Kendala atau eror selama pengerjaan:
+- Tidak ditemukan eror atau kendala yang berarti saat pengerjaan no3c
 
