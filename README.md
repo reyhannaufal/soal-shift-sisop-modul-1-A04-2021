@@ -229,3 +229,26 @@ Buat folder baru dengan nama yang telah disediakan di variabel "nama_folder". Pi
 Kendala atau eror selama pengerjaan:
 - Tidak ditemukan eror atau kendala yang berarti saat pengerjaan no3c
 
+### 3d
+**Penjelasan**
+```sh
+dir="`pwd`/"
+```
+Melakukan perintah 'pwd' untuk mengetahui directory dari script dan menyimpannya di variabel "dir".
+```sh
+program="soal3c.sh"
+"`bash $dir$program`"
+```
+Jalankan program script "soal3c.sh". Dengan perintah 'bash'.
+```sh
+pass="`date +%m%d%Y`"
+"`zip -r --password $pass Koleksi.zip */`"
+```
+Buat password yang berisi tanggal pada saat script dijalankan dengan perintah 'date' dan simpan di variabel "pass". Salin semua folder yang berisi file dari script "soal3c.sh" ke dalam folder zip dengan bantuan wild card "*/" dengan password yang sudah dibuat tadi. Dengan perintah 'zip'.
+```sh
+"`rm -r $dir*/`"
+```
+Hapus semua folder yang telah dicopy ke zip.
+
+Kendala atau eror selama pengerjaan:
+- Mengalami kebingungan untuk memindah type folder di linux. Dan nemu solusinya dengan wildcard "*/". Link referensi: https://unix.stackexchange.com/questions/68489/command-to-zip-multiple-directories-into-individual-zip-files
