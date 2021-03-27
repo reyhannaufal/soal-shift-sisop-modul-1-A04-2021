@@ -6,7 +6,7 @@ echo "A."
 grep -o -e "ERROR.*)" -e "INFO.*)" `pwd`/syslog.log
 echo
 echo "B."
-grep -i -o -P '(?<=error).* ' `pwd`/syslog.log | sort | uniq -c | sort -nr |sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2\1/g'
+grep -i -o -P '(?<=error).* ' `pwd`/syslog.log | sort | uniq -c | sort -nr |sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2\1/'
 
 echo
 echo "C. "
@@ -23,7 +23,7 @@ echo
 echo "D"
 
 echo Error,Count > `pwd`/error_message.csv
-grep -i -o -P '(?<=error).* ' `pwd`/syslog.log | sort | uniq -c | sort -nr|sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2,\1/g' >> `pwd`/error_message.csv
+grep -i -o -P '(?<=error).* ' `pwd`/syslog.log | sort | uniq -c | sort -nr|sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2,\1/' >> `pwd`/error_message.csv
 
 echo
 echo "E. "
