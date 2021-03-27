@@ -33,12 +33,19 @@ Membuat array yang berisikan semua username
 ```sh
 for x in ${arr[@]} ; 
 do
-	errorc=$(grep -o -c "ERROR.*${x}" syslog.log)
-	infoc=$(grep -o -c "INFO.*${x}" syslog.log)
-	total=$((errorc + infoc))
-	echo "${x} Error = ${errorc} Info = ${infoc} Total = ${total}"
+	errorc=0
+	infoc=0
+	errorc=$(grep -o -c "ERROR.*${x})" syslog.log)
+	infoc=$(grep -o -c "INFO.*${x})" syslog.log)
+	#total=$((total+errorc+infoc))
+
+	echo "${x} Error = ${errorc}  Info = ${infoc}"
 done
 ```
+Looping untuk mengconcate string username dengan hasil count kemudian mencetak string tersebut
+### 1d dan 1e
+Menulis output yang didapat dari 1b dan 1c ke dalam csv
+
 ## NO2
 ### 2a
 Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui Row ID dan profit percentage terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:
