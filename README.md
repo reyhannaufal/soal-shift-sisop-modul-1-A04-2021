@@ -10,7 +10,35 @@
 3. [NO 3](#NO3)
 
 ## NO1
-Soal no 1
+### 1a
+Mengambil line yang terdapat keyword "INFO" dan "ERROR"
+### 1b
+```sh
+grep -i -o -P '(?<=error).* ' `pwd`/syslog.log
+```
+Mengambil line dengan keyword ERROR tanpa memasukkan keywoard dan kata sebelumnya
+```sh
+ sort | uniq -c | sort -nr
+```
+Sort line yang diambil agar bisa di count melalui uniq, kemudian do sort kembali berdasarkan count descending 
+```sh
+sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2\1/'
+```
+Swap posisi count dan deskripsi error
+### 1c
+```sh
+arr=( $(grep -i -o -P '(?<=\().*(?=\))' `pwd`/syslog.log | sort | uniq) )
+```
+Membuat array yang berisikan semua username
+```sh
+for x in ${arr[@]} ; 
+do
+	errorc=$(grep -o -c "ERROR.*${x}" syslog.log)
+	infoc=$(grep -o -c "INFO.*${x}" syslog.log)
+	total=$((errorc + infoc))
+	echo "${x} Error = ${errorc} Info = ${infoc} Total = ${total}"
+done
+```
 ## NO2
 ### 2a
 Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui Row ID dan profit percentage terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:
