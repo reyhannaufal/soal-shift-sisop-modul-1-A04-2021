@@ -1,7 +1,8 @@
 #!/bin/bash
 dir="`pwd`/"
 
-tanggal="`date +%d`"
+#tanggal="`date +%d`"
+tanggal=30
 nama_folder="`date +%d-%m-%Y`"
 
 if [ $(($tanggal % 2)) -eq 1 ]
