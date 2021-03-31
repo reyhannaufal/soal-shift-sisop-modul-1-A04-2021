@@ -9,5 +9,3 @@ pass="`date +%m%d%Y`"
 
 "`zip -r --password $pass Koleksi.zip */`"
 "`rm -r $dir*/`"
-
-

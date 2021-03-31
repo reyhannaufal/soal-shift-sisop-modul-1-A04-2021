@@ -1,34 +1,13 @@
 #!/bin/bash
 dir="`pwd`/"
 
-for ((num=1; num<=23; num=num+1))
-do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-        wget -N -a Foto.log --page-requisites "https://loremflickr.com/320/240/kitten" -O "$dir$name"
-done
-
-rdfind -deleteduplicates true "$dir"
+program="soal3a.sh"
+"`bash $dir$program`"
 
 name_folder="`date +%d-%m-%Y`"
 `mkdir "$name_folder"`
 
 `mv Foto.log "$name_folder"`
-
-for ((num=1; num<=23; num=num+1))
-do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-	`mv "$name" "$name_folder"`
-done
+name_file="Koleksi"
+`mv $name_file* "$name_folder"`
 
