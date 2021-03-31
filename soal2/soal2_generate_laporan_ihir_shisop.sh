@@ -27,7 +27,7 @@ awk -F '\t' 'BEGIN {
     print "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:"
  } {
      if($10 == "Albuquerque") {
-         if($2 ~ 17) 
+         if($3 ~ /[0-9][0-9]-[0-9][0-9]-17/) 
             a[$7]++
      }
  } END {
