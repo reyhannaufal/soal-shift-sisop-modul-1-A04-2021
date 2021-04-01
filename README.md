@@ -86,8 +86,8 @@ Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh kar
 **Penjelasan**
 ```sh
 if($10 == "Albuquerque") {
-        if($2 ~ 17) 
-        a[$7]++
+         if($3 ~ /[0-9][0-9]-[0-9][0-9]-17/) 
+            a[$7]++
 }
 ```
 Dengan menggunakan if statement pada kolom ke-10 untuk mendapatkan customer yang melakukan transaksi di kota Albuquerque. Lalu dengan menggunakan if (nested if) untuk mendapatkan transaksi pada tahun 2017. Nama-nama customer disimpan pada array a
