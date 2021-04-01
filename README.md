@@ -146,22 +146,31 @@ Mendefisikan nilai minimum dan membandingan nilai pada array sum, sehingga menda
 ```sh 
 for ((num=1; num<=23; num=num+1))
 do
-	name="Koleksi_"
-	if [ $num -lt 10 ]
-	then
-		name="${name}0${num}"
-	else
-		name="${name}${num}"
-	fi
-	wget -N -a Foto.log --page-requisites "https://loremflickr.com/320/240/kitten" -O "$dir$name"
+	wget -a Foto.log "https://loremflickr.com/320/240/kitten" "$dir"
 done
 ```
-Iterasi sebanyakan 23 kali sesuai jumlah gambar yang akan didownload. Di dalam iterasi dibuat variabel nama yang berisi string "Koleksi_" untuk menamai file/gambar yang didownload. Variabel nama tersebut disesuaikan formatnya yakni ditambahin dua digit angka (sesuai iterasi) setelahnya ("Koleksi_01, Koleksi_02, ... Koleksi_23"). Download gambar dari link="https://loremflickr.com/320/240/kitten", dengan fungsi wget dan simpan lognya ke file "Foto.log" dengan parameter -a. Dan jangan lupa namai file/gambar download tersebut sesuai dengan format/variabel nama.
+Iterasi sebanyakan 23 kali sesuai jumlah gambar yang akan didownload. Download gambar dari link="https://loremflickr.com/320/240/kitten", dengan fungsi wget dan simpan lognya ke file "Foto.log" dengan parameter -a. Lalu langsung simpen gambar ke directory yang diinginkan.
 ```sh
 rdfind -deleteduplicates true "$dir"
 ```
 Hapus atau remove semua file atau gambar yang ada lebih dari satu (duplikat) dengan fungsi rdfind dan parameter -deleteduplicates true "alamat file".
+```sh
+num=0
 
+for file_d in $dir"kitten"*
+do
+	let "num+=1"
+	name="Koleksi_"
+        if [ $num -lt 10 ]
+        then
+                name="${name}0${num}"
+        else
+                name="${name}${num}"
+        fi
+	`mv "$file_d" "$name"`
+done
+```
+Iterasi semua gambar yang telah didownload dengan wild card kitten*. Di dalam iterasi dibuat variabel nama yang berisi string "Koleksi_" untuk merename file/gambar yang didownload tadi dengan command (mv). Variabel nama tersebut disesuaikan formatnya yakni ditambahin dua digit angka (sesuai iterasi) setelahnya ("Koleksi_01, Koleksi_02, ...").  Dan jangan lupa namai file/gambar download tersebut sesuai dengan format/variabel name.
 **Kendala atau eror selama pengerjaan:**
 - Fungsi wget tidak bisa digunakan dengan pesan eror="Permision denied"
 Cara mengatasi dengan memberi fungsi sudo sebelum wget. Link referensi: https://askubuntu.com/questions/55606/getting-permission-denied-error-with-wget
