@@ -185,23 +185,10 @@ Cara penyelesaiannya dengan download semua gambar lalu hapus gambar duplikasi de
 ### 3b
 **Penjelasan**
 ```sh
-dir="`pwd`/"
-
-for ((num=1; num<=23; num=num+1))
-do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-        wget -N -a Foto.log --page-requisites "https://loremflickr.com/320/240/kitten" -O "$dir$name"
-done
-
-rdfind -deleteduplicates true "$dir"
+program="soal3a.sh"
+"`bash $dir$program`"
 ```
-Copy semua isi dari soal3a.sh (karena untuk awalan sama).
+Jalankan script soal3a.sh (karena untuk awalan sama).
 ```sh
 name_folder="`date +%d-%m-%Y`"
 `mkdir "$name_folder"`
@@ -209,19 +196,10 @@ name_folder="`date +%d-%m-%Y`"
 ```
 Buat nama folder dengan nama tanggal dengan format DD-MM-YYYY, dengan fungsi date. Buat folder dengan nama di atas dengan fungsi mkdir. Pindahkan file "Foto.log" ke folder baru tersebut dengan fungsi mv.
 ```sh
-for ((num=1; num<=23; num=num+1))
-do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-	`mv "$name" "$name_folder"`
-done
+name_file="Koleksi"
+`mv $name_file* "$name_folder"`
 ```
-Iterasi sampai 23 kali untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. 
+Iterasi semua file gambar dengan wild card 'Koleksi*' untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. 
 ```sh
 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * /home/mufis/PS/Pratikum_01/soal3/soal3b.sh
 ```
