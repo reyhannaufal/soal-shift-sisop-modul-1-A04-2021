@@ -171,6 +171,12 @@ do
 done
 ```
 Iterasi semua gambar yang telah didownload dengan wild card kitten*. Di dalam iterasi dibuat variabel nama yang berisi string "Koleksi_" untuk merename file/gambar yang didownload tadi dengan command (mv). Variabel nama tersebut disesuaikan formatnya yakni ditambahin dua digit angka (sesuai iterasi) setelahnya ("Koleksi_01, Koleksi_02, ...").  Dan jangan lupa namai file/gambar download tersebut sesuai dengan format/variabel name.
+```sh
+nama_rem="results.txt"
+`rm "$dir$nama_rem"`
+```
+Hapus file "results.txt" karena mengandung log hasil pengahapusan file yang duplikat.
+
 **Kendala atau eror selama pengerjaan:**
 - Fungsi wget tidak bisa digunakan dengan pesan eror="Permision denied"
 Cara mengatasi dengan memberi fungsi sudo sebelum wget. Link referensi: https://askubuntu.com/questions/55606/getting-permission-denied-error-with-wget
