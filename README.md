@@ -199,11 +199,11 @@ Buat nama folder dengan nama tanggal dengan format DD-MM-YYYY, dengan fungsi dat
 name_file="Koleksi"
 `mv $name_file* "$name_folder"`
 ```
-Iterasi semua file gambar dengan wild card 'Koleksi*' untuk memindahkan semua file gambar dengan fungsi mv ke folder di atas. 
+Pindah semua file gambar dengan wild card 'Koleksi*' disertai dengan fungsi mv ke folder yang telah dibuat di atas. 
 ```sh
-0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * /home/mufis/PS/Pratikum_01/soal3/soal3b.sh
+0 20 1-31/7,2-31/4 * * /bin/bash /home/mufis/PS/Pratikum_01/soal3/soal3b.sh
 ```
-Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1,2,6,8,10,14,15,18,22,26,29,30 * * (sesuai soal).
+Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", dengan pola= 0 20 1-31/7,2-31/4 * * (sesuai soal).
 
 **Kendala atau eror selama pengerjaan:**
 - Crontab tidak bisa berjalan di komputer atau linux saya.
