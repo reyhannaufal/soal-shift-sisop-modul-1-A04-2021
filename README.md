@@ -211,32 +211,29 @@ Buat crontab dengan nama "cron3b.tab" untuk mengerjakan script "soal3b.sh", deng
 ### 3c
 **Penjelasan**
 ```sh
-tanggal="`date +%d`"
 nama_folder="`date +%d-%m-%Y`"
+
+A="2021-01-01"
+intrvl_hari=$(( ($(date +%s) - $(date -d $A +%s)) / 86400 ))
 ```
-Membuat variabel "tanggal" untuk menyimpan nilai tanggal (hari ke-h script dijalankan). Serta membuat variabel "nama_folder" dengan fungsi 'date' untuk menyimpan nama folder yang akan dipakai nantinya.
+Membuat variabel "nama_folder" dengan fungsi 'date' untuk menyimpan nama folder yang akan dipakai nantinya. Membuat variabel "A" untuk sebagai titik awal suatu tanggal. Dengan titik awal "A" sehingga bisa digunakan untuk menentukan kapan mendownload gambar kelinci atau kucing (karena harus bergantian berdasarkan hari). Interval hari (hari sekarang-titik awal "A") disimpan di variabel "intrvl_hari".
 ```sh
-if [ $(($tanggal % 2)) -eq 1 ]
+if [ $(($intrvl_hari % 2)) -eq 1 ]
 then
 	url="https://loremflickr.com/320/240/bunny"
 	nama_folder="Kelinci_$nama_folder"
+	nama_for="bunny"
 else
-	url="https://loremflickr.com/320/240/kitten"
-	nama_folder="Kucing_$nama_folder"
+	url="https://loremflickr.com/320/240/bunny"
+	nama_folder="Kelinci_$nama_folder"
+	nama_for="bunny"
 fi
 ```
-Karena harus bergantian secara hari file yang harus didownload (gambar kelinci atau kucing), pakai fungsi "if" untuk memberi kondisi dengan parameter "tanggal" yang telah dibuat tadi lalu dimod 2. Jika ganjil maka download kelinci dan nama folder "Kelinci_(tanggal saat itu)". Selain itu, gambar kucing yang akan didownload.
+Karena harus bergantian secara hari file yang harus didownload (gambar kelinci atau kucing), pakai fungsi "if" untuk memberi kondisi dengan parameter "intrvl_hari" yang telah dibuat tadi lalu dimod 2. Jika ganjil maka download kelinci dan nama folder "Kelinci_(tanggal saat itu)". Selain itu, gambar kucing yang akan didownload.
 ```sh
 for ((num=1; num<=23; num=num+1))
 do
-        name="Koleksi_"
-        if [ $num -lt 10 ]
-        then
-                name="${name}0${num}"
-        else
-                name="${name}${num}"
-        fi
-        wget -a Foto.log "$url" -O "$dir$name"
+        wget -a Foto.log "$url" "$dir"
 done
 ```
 Lakukan iterasi 23 untuk mendowload file gambar/kelinci sesuai hari saat itu.
@@ -247,6 +244,23 @@ rdfind -deleteduplicates true "$dir"
 ```
 Hapus file yang berduplikat. Hapus file "results.txt" karena mengandung hasil pengahapusan file yang duplikat.
 ```sh
+num=0
+
+for file_d in $dir$nama_for*
+do
+        let "num+=1"
+        name="Koleksi_"
+        if [ $num -lt 10 ]
+        then
+                name="${name}0${num}"
+        else
+                name="${name}${num}"
+        fi
+        `mv "$file_d" "$dir$name"`
+done
+```
+Iterasi semua gambar yang telah didownload dengan wild card '$namafor*' (sesuai gambar yg didownload (bunny/kitten)). Di dalam iterasi dibuat variabel nama yang berisi string "Koleksi_" untuk merename file/gambar yang didownload tadi dengan command (mv). Variabel nama tersebut disesuaikan formatnya yakni ditambahin dua digit angka (sesuai iterasi) setelahnya ("Koleksi_01, Koleksi_02, ...").  Dan jangan lupa namai file/gambar download tersebut sesuai dengan format/variabel name.
+```sh
 `mkdir "$nama_folder"`
 `mv Foto.log "$nama_folder"`
 name_file="Koleksi"
@@ -254,7 +268,7 @@ name_file="Koleksi"
 ```
 Buat folder baru dengan nama yang telah disediakan di variabel "nama_folder". Pindahkan file tadi ke dalam folder yang telah dibuat. Pindahkan file 'Foto.log' dan semua gambar tadi ke folder baru.
 
-Kendala atau eror selama pengerjaan:
+**Kendala atau eror selama pengerjaan:**
 - Tidak ditemukan eror atau kendala yang berarti saat pengerjaan no3c
 
 ### 3d
