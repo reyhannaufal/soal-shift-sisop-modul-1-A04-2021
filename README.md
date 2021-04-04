@@ -25,6 +25,10 @@ Sort line yang diambil agar bisa di count melalui uniq, kemudian do sort kembali
 sed -E 's/^ *([0-9]||[0-9][0-9])  (.+)/\2\1/'
 ```
 Swap posisi count dan deskripsi error
+
+**Kendala atau eror selama pengerjaan:**
+Try and error sed agar sesuai dengan kebutuhan soal
+
 ### 1c
 ```sh
 arr=( $(grep -i -o -P '(?<=\().*(?=\))' `pwd`/syslog.log | sort | uniq) )
@@ -43,6 +47,10 @@ do
 done
 ```
 Looping untuk mengconcate string username dengan hasil count kemudian mencetak string tersebut
+
+**Kendala atau eror selama pengerjaan:**
+Memperbaiki hasil grep yang tidak sesuai
+
 ### 1d dan 1e
 Menulis output yang didapat dari 1b dan 1c ke dalam csv
 
