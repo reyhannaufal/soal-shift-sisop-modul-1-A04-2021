@@ -54,6 +54,19 @@ Memperbaiki hasil grep yang tidak sesuai
 ### 1d dan 1e
 Menulis output yang didapat dari 1b dan 1c ke dalam csv
 
+### Link referensi yang digunakan dalam pengerjaan soal
+https://www.tutorialspoint.com/unix/unix-regular-expressions.htm
+
+https://edoras.sdsu.edu/doc/sed.html#:~:text=If%20you%20want%20to%20switch,pattern%20you%20are%20searching%20for.
+
+https://opensource.com/article/18/5/you-dont-know-bash-intro-bash-arrays
+
+https://stackoverflow.com/questions/9449417/how-do-i-assign-the-output-of-a-command-into-an-array
+
+https://phoenixnap.com/kb/grep-command-linux-unix-examples
+
+https://stackoverflow.com/questions/52097124/shell-insert-variable-into-a-command
+
 ## NO2
 ### 2a
 Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui Row ID dan profit percentage terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:
